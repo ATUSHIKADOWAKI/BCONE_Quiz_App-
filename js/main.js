@@ -2,12 +2,12 @@
 
 {
   const question = document.getElementById('question');//ID取得
-  const choices = document.getElementById('choices');//ul
-  const btn = document.getElementById('btn');//next div
-  const result = document.getElementById('result');//result画面
-  const scoreLabel = document.querySelector('#result > p');//pを取得
-  const explain = document.querySelector('.explain');//pを取得
-  const reference = document.querySelector('.reference');//pを取得
+  const choices = document.getElementById('choices');
+  const btn = document.getElementById('btn');
+  const result = document.getElementById('result');
+  const scoreLabel = document.querySelector('#result > p');
+  const explain = document.querySelector('.explain');
+  const reference = document.querySelector('.reference');
 
   //クイズのデータを用意。オブジェクトの配列で持つ
   const quizSet = shuffle([
@@ -34,12 +34,12 @@
 
   function checkAnswer(li){//正誤判定
     // if(isAnswered === true){
-    if(isAnswered){//１回のアンサーのみにさせる
+    if(isAnswered){
       return;
     }
     isAnswered = true;
 
-    if(li.textContent === quizSet[currentNum].c[0]){//正解を選んだら。[0]を全部正解の設定をしているから
+    if(li.textContent === quizSet[currentNum].c[0]){
       li.classList.add('correct');//correctクラスをつける
       score++;//正解したらスコアをプラス
     }else{
@@ -50,7 +50,7 @@
 
   function setQuiz(){//クイズをセットする関数
     isAnswered = false;
-    question.textContent = quizSet[currentNum].q;//↑のqに置き換える。currentNumが0なのでquizSet[0]が
+    question.textContent = quizSet[currentNum].q;
 
     while(choices.firstChild){//nullになるまで繰り返してくれる。
       choices.removeChild(choices.firstChild);
@@ -61,7 +61,7 @@
     shuffledChoices.forEach(choice =>{//quizSet[0]のcにforEachで、それぞれ以下の処理
       const li = document.createElement('li');//li要素を作る。
       li.textContent = choice;//配列の一つ一つの要素であるchoiceをテキストで代入。
-      li.addEventListener('click',()=>{//クリックしたときに
+      li.addEventListener('click',()=>{
         checkAnswer(li);
         scoreLabel.textContent = `正解は:${quizSet[currentNum].c[0]}`;
         explain.textContent = `${quizSet[currentNum].e[0]}`;
@@ -73,38 +73,6 @@
     
   }
  
-  setQuiz();
-
-   
-      // console.log(`Score:${score}/${quizSet.length}`);
-      //hiddenをはずす（リザルトが降ってくる）
       setQuiz();
 
 }
-
-
-
-// やったこと
-// 1.HTMLでいる要素に最低限記入。
-// 2.CSSで大枠のデザインを作る
-// 3.JavaScriptで機能を追加していく。
-
-// 1.出題される問題をランダムに配置される
-// 2.解答もランダムに配置
-// 3.正誤判定
-// 4.次へ
-// 5.結果
-
-
-// 次作りたい物
-// ・RedBullBcOneの問題を作る、結構おおめ。
-// ・出題、解答がランダムなのは一緒
-// ・回答後、正解か不正解か出る。
-// （「どれを選んだか」と「正解、詳細、動画等URL」を表示）戻る。→ランダム問題
-// ・何問中何問正解とかはない。
-
-
-
-// ※ゆくゆくは、会員登録、連続正解数ランキング、ストップウォッチで制限時間。、英語ver
-// みんなから問題を投稿（こっちで手動で追加。）
-
